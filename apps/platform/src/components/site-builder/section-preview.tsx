@@ -30,12 +30,12 @@ export function SectionPreview({ section }: SectionPreviewProps) {
             >
               {(s.headline as string) || 'Hero Headline'}
             </h2>
-            {s.subheadline && (
+            {!!s.subheadline && (
               <p className="text-sm opacity-80" style={{ color: (s.textColor as string) ?? '#fff' }}>
                 {s.subheadline as string}
               </p>
             )}
-            {s.ctaText && (
+            {!!s.ctaText && (
               <div className="mt-4 inline-block bg-cc-gold text-white text-xs px-4 py-2 rounded-lg">
                 {s.ctaText as string}
               </div>
@@ -58,7 +58,7 @@ export function SectionPreview({ section }: SectionPreviewProps) {
           )}
           <div className="flex-1 flex flex-col justify-center px-6 bg-white">
             <h2 className="font-serif text-lg font-bold">{(s.headline as string) || 'Headline'}</h2>
-            {s.subheadline && <p className="text-xs text-muted-foreground mt-1">{s.subheadline as string}</p>}
+            {!!s.subheadline && <p className="text-xs text-muted-foreground mt-1">{s.subheadline as string}</p>}
           </div>
           {s.imagePosition !== 'left' && (
             <div
@@ -197,7 +197,7 @@ export function SectionPreview({ section }: SectionPreviewProps) {
           >
             {(s.headline as string) || 'Call to Action'}
           </h3>
-          {s.ctaText && (
+          {!!s.ctaText && (
             <div
               className="inline-block mt-3 px-6 py-2 rounded-lg text-sm font-medium text-white"
               style={{ backgroundColor: (s.accentColor as string) ?? '#C4892A' }}
