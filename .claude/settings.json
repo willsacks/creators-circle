@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(PRISMA_GENERATE_SKIP_AUTOINSTALL=1 node_modules/.bin/prisma generate --schema=../../prisma/schema.prisma)",
+      "Bash(node -e \"const { execSync } = require\\('child_process'\\); execSync\\('node_modules/.pnpm/prisma@5.22.0/node_modules/prisma/build/index.js generate --schema=prisma/schema.prisma', { stdio: 'inherit', cwd: process.cwd\\(\\) }\\)\")",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(node_modules/.bin/prisma db *)",
+      "Bash(pnpm dev *)",
+      "Read(//Users/willsacks/.claude/projects/**)"
+    ]
+  }
+}
