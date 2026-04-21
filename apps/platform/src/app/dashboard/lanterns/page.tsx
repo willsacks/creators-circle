@@ -42,33 +42,39 @@ export default async function LanternsPage() {
           {lanterns.map((lantern) => {
             const tags = JSON.parse(lantern.tags || '[]') as string[]
             return (
-              <div key={lantern.id} className="bg-card border border-border rounded-2xl p-5">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-serif text-lg font-bold truncate">{lantern.title}</h3>
-                      <span className={`shrink-0 text-xs px-2 py-0.5 rounded-full ${lantern.visibility === 'COMMUNITY' ? 'bg-cc-gold/10 text-cc-gold-dark' : 'bg-muted text-muted-foreground'}`}>
-                        {lantern.visibility}
-                      </span>
-                    </div>
-                    <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{lantern.body}</p>
-                    {tags.length > 0 && (
-                      <div className="flex flex-wrap gap-1.5">
-                        {tags.map((tag) => (
-                          <span key={tag} className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full">
-                            #{tag}
-                          </span>
-                        ))}
+              <div key={lantern.id} className="bg-card border border-border rounded-2xl overflow-hidden">
+                {lantern.imageUrl && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={lantern.imageUrl} alt={lantern.title} className="w-full max-h-64 object-cover" />
+                )}
+                <div className="p-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-serif text-lg font-bold truncate">{lantern.title}</h3>
+                        <span className={`shrink-0 text-xs px-2 py-0.5 rounded-full ${lantern.visibility === 'COMMUNITY' ? 'bg-cc-gold/10 text-cc-gold-dark' : 'bg-muted text-muted-foreground'}`}>
+                          {lantern.visibility}
+                        </span>
                       </div>
-                    )}
-                    <div className="flex items-center gap-3 mt-3 text-xs text-muted-foreground">
-                      <span>{formatRelativeTime(lantern.createdAt)}</span>
-                      <span>🔥 {lantern.reactions.length}</span>
-                      <span>💬 {lantern.comments.length}</span>
+                      <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{lantern.body}</p>
+                      {tags.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5">
+                          {tags.map((tag) => (
+                            <span key={tag} className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full">
+                              #{tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      <div className="flex items-center gap-3 mt-3 text-xs text-muted-foreground">
+                        <span>{formatRelativeTime(lantern.createdAt)}</span>
+                        <span>🔥 {lantern.reactions.length}</span>
+                        <span>💬 {lantern.comments.length}</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-2 shrink-0">
-                    <DeleteLanternButton lanternId={lantern.id} />
+                    <div className="flex items-center gap-2 shrink-0">
+                      <DeleteLanternButton lanternId={lantern.id} />
+                    </div>
                   </div>
                 </div>
               </div>
