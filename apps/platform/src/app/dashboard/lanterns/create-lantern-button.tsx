@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Plus } from 'lucide-react'
 import { toast } from 'sonner'
+import { MediaUpload } from '@/components/ui/media-upload'
 
 export function CreateLanternButton() {
   const [open, setOpen] = useState(false)
@@ -89,16 +90,12 @@ export function CreateLanternButton() {
                   className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-cc-gold text-sm"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-1.5">Image URL (optional)</label>
-                <input
-                  type="url"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="https://..."
-                  className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-cc-gold text-sm"
-                />
-              </div>
+              <MediaUpload
+                label="Image (optional)"
+                value={imageUrl}
+                onChange={setImageUrl}
+                accept="image"
+              />
               <div>
                 <label className="block text-sm font-medium mb-1.5">Visibility</label>
                 <div className="flex gap-3">

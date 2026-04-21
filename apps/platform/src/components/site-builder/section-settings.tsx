@@ -1,6 +1,7 @@
 'use client'
 
 import { Section } from './page-editor'
+import { MediaUpload } from '@/components/ui/media-upload'
 
 interface SectionSettingsPanelProps {
   section: Section
@@ -100,8 +101,8 @@ export function SectionSettingsPanel({ section, onChange }: SectionSettingsPanel
     case 'hero-fullwidth':
       return (
         <div>
-          <Field label="Background Image URL">
-            <TextInput value={(s.backgroundImage as string) ?? ''} onChange={(v) => set('backgroundImage', v)} placeholder="https://..." />
+          <Field label="Background Image">
+            <MediaUpload value={(s.backgroundImage as string) ?? ''} onChange={(v) => set('backgroundImage', v)} accept="image" />
           </Field>
           <Field label="Headline">
             <TextInput value={(s.headline as string) ?? ''} onChange={(v) => set('headline', v)} placeholder="Your headline" />
@@ -127,8 +128,8 @@ export function SectionSettingsPanel({ section, onChange }: SectionSettingsPanel
     case 'hero-split':
       return (
         <div>
-          <Field label="Image URL">
-            <TextInput value={(s.image as string) ?? ''} onChange={(v) => set('image', v)} placeholder="https://..." />
+          <Field label="Image">
+            <MediaUpload value={(s.image as string) ?? ''} onChange={(v) => set('image', v)} accept="image" />
           </Field>
           <Field label="Headline">
             <TextInput value={(s.headline as string) ?? ''} onChange={(v) => set('headline', v)} />
@@ -177,8 +178,8 @@ export function SectionSettingsPanel({ section, onChange }: SectionSettingsPanel
     case 'offering-hero':
       return (
         <div>
-          <Field label="Background Image URL">
-            <TextInput value={(s.backgroundImage as string) ?? ''} onChange={(v) => set('backgroundImage', v)} placeholder="https://..." />
+          <Field label="Background Image">
+            <MediaUpload value={(s.backgroundImage as string) ?? ''} onChange={(v) => set('backgroundImage', v)} accept="image" />
           </Field>
           <Field label="Title">
             <TextInput value={(s.title as string) ?? ''} onChange={(v) => set('title', v)} />
@@ -199,14 +200,31 @@ export function SectionSettingsPanel({ section, onChange }: SectionSettingsPanel
       )
 
     case 'music-embed':
+      return (
+        <div>
+          <Field label="Title">
+            <TextInput value={(s.title as string) ?? ''} onChange={(v) => set('title', v)} />
+          </Field>
+          <Field label="Embed URL (Spotify, SoundCloud, etc.)">
+            <TextInput value={(s.embedUrl as string) ?? ''} onChange={(v) => set('embedUrl', v)} placeholder="https://open.spotify.com/embed/..." />
+          </Field>
+          <Field label="Description">
+            <TextArea value={(s.description as string) ?? ''} onChange={(v) => set('description', v)} rows={2} />
+          </Field>
+        </div>
+      )
+
     case 'video-embed':
       return (
         <div>
           <Field label="Title">
             <TextInput value={(s.title as string) ?? ''} onChange={(v) => set('title', v)} />
           </Field>
-          <Field label="Embed URL">
-            <TextInput value={(s.embedUrl as string) ?? ''} onChange={(v) => set('embedUrl', v)} placeholder="https://open.spotify.com/embed/..." />
+          <Field label="Upload Video">
+            <MediaUpload value={(s.videoUrl as string) ?? ''} onChange={(v) => set('videoUrl', v)} accept="video" />
+          </Field>
+          <Field label="Or paste embed URL (YouTube, Vimeo)">
+            <TextInput value={(s.embedUrl as string) ?? ''} onChange={(v) => set('embedUrl', v)} placeholder="https://www.youtube.com/embed/..." />
           </Field>
           <Field label="Description">
             <TextArea value={(s.description as string) ?? ''} onChange={(v) => set('description', v)} rows={2} />
