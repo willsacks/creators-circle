@@ -66,7 +66,7 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
             >
               {(s.headline as string) || 'Headline'}
             </h1>
-            {s.subheadline && (
+            {!!s.subheadline && (
               <p
                 style={{
                   fontSize: 'clamp(1rem, 2vw, 1.5rem)',
@@ -81,7 +81,7 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
                 {s.subheadline as string}
               </p>
             )}
-            {s.ctaText && s.ctaUrl && (
+            {!!s.ctaText && !!s.ctaUrl && (
               <a
                 href={s.ctaUrl as string}
                 style={{
@@ -118,8 +118,8 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
               <h1 style={{ fontFamily: theme.fontHeading, fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: theme.text, marginBottom: '24px', lineHeight: 1.1 }}>
                 {(s.headline as string) || 'Headline'}
               </h1>
-              {s.subheadline && <p style={{ color: theme.muted, fontSize: '1.125rem', lineHeight: 1.7, marginBottom: '32px' }}>{s.subheadline as string}</p>}
-              {s.ctaText && s.ctaUrl && (
+              {!!s.subheadline && <p style={{ color: theme.muted, fontSize: '1.125rem', lineHeight: 1.7, marginBottom: '32px' }}>{s.subheadline as string}</p>}
+              {!!s.ctaText && !!s.ctaUrl && (
                 <a href={s.ctaUrl as string} style={{ display: 'inline-block', backgroundColor: theme.accent, color: '#fff', padding: '14px 32px', borderRadius: '4px', textDecoration: 'none', fontSize: '0.875rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                   {s.ctaText as string}
                 </a>
@@ -169,7 +169,7 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
                   style={{ width: '100%', display: 'block', transition: 'transform 0.4s ease' }}
                   loading="lazy"
                 />
-                {s.showCaptions && img.caption && (
+                {!!s.showCaptions && !!img.caption && (
                   <p style={{ color: theme.muted, fontSize: '0.75rem', padding: '8px', textAlign: 'center' }}>{img.caption}</p>
                 )}
               </div>
@@ -187,7 +187,7 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
             {images.map((img, i) => (
               <div key={i} style={{ width: '70vw', maxWidth: '700px', flexShrink: 0 }}>
                 <img src={img.url} alt={img.caption ?? ''} style={{ width: '100%', height: '500px', objectFit: 'cover', display: 'block' }} loading="lazy" />
-                {s.showCaptions && img.caption && (
+                {!!s.showCaptions && !!img.caption && (
                   <p style={{ color: theme.muted, fontSize: '0.75rem', padding: '8px', textAlign: 'center' }}>{img.caption}</p>
                 )}
               </div>
@@ -239,8 +239,8 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
             <h2 style={{ fontFamily: theme.fontHeading, fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', color: '#fff', marginBottom: '24px', lineHeight: 1.1 }}>
               {(s.title as string) || 'Offering Title'}
             </h2>
-            {s.description && <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '1.125rem', lineHeight: 1.7, marginBottom: '40px' }}>{s.description as string}</p>}
-            {s.ctaText && s.ctaUrl && (
+            {!!s.description && <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '1.125rem', lineHeight: 1.7, marginBottom: '40px' }}>{s.description as string}</p>}
+            {!!s.ctaText && !!s.ctaUrl && (
               <a href={s.ctaUrl as string} style={{ display: 'inline-block', backgroundColor: theme.accent, color: '#fff', padding: '16px 40px', borderRadius: '4px', textDecoration: 'none', fontSize: '0.875rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                 {s.ctaText as string}
               </a>
@@ -253,9 +253,9 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
       return (
         <section style={{ padding: `${getPadding(s.paddingTop)} 24px ${getPadding(s.paddingBottom)}`, backgroundColor: theme.surface }}>
           <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-            {s.title && <h2 style={{ fontFamily: theme.fontHeading, fontSize: 'clamp(2rem, 4vw, 3rem)', color: theme.text, marginBottom: '16px' }}>{s.title as string}</h2>}
-            {s.description && <p style={{ color: theme.muted, marginBottom: '32px' }}>{s.description as string}</p>}
-            {s.embedUrl && (
+            {!!s.title && <h2 style={{ fontFamily: theme.fontHeading, fontSize: 'clamp(2rem, 4vw, 3rem)', color: theme.text, marginBottom: '16px' }}>{s.title as string}</h2>}
+            {!!s.description && <p style={{ color: theme.muted, marginBottom: '32px' }}>{s.description as string}</p>}
+            {!!s.embedUrl && (
               <iframe
                 src={s.embedUrl as string}
                 width="100%"
@@ -272,12 +272,12 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
     case 'video-embed':
       return (
         <section style={{ padding: `${getPadding(s.paddingTop)} 0 ${getPadding(s.paddingBottom)}` }}>
-          {s.title && (
+          {!!s.title && (
             <div style={{ textAlign: 'center', marginBottom: '32px', padding: '0 24px' }}>
               <h2 style={{ fontFamily: theme.fontHeading, fontSize: '3rem', color: theme.text }}>{s.title as string}</h2>
             </div>
           )}
-          {s.embedUrl && (
+          {!!s.embedUrl && (
             <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
               <iframe src={s.embedUrl as string} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }} loading="lazy" />
             </div>
@@ -312,8 +312,8 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
           <h2 style={{ fontFamily: theme.fontHeading, fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: (s.textColor as string) ?? theme.text, marginBottom: '16px', lineHeight: 1.1 }}>
             {(s.headline as string) || 'Call to Action'}
           </h2>
-          {s.subheadline && <p style={{ color: `${(s.textColor as string) ?? theme.text}99`, fontSize: '1.125rem', marginBottom: '40px' }}>{s.subheadline as string}</p>}
-          {s.ctaText && s.ctaUrl && (
+          {!!s.subheadline && <p style={{ color: `${(s.textColor as string) ?? theme.text}99`, fontSize: '1.125rem', marginBottom: '40px' }}>{s.subheadline as string}</p>}
+          {!!s.ctaText && !!s.ctaUrl && (
             <a href={s.ctaUrl as string} style={{ display: 'inline-block', backgroundColor: (s.accentColor as string) ?? theme.accent, color: '#fff', padding: '18px 48px', borderRadius: '4px', textDecoration: 'none', fontSize: '0.9rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
               {s.ctaText as string}
             </a>
@@ -327,7 +327,7 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
           <h2 style={{ fontFamily: theme.fontHeading, fontSize: 'clamp(2rem, 4vw, 3rem)', color: theme.text, marginBottom: '12px' }}>
             {(s.headline as string) || 'Join the list'}
           </h2>
-          {s.subheadline && <p style={{ color: theme.muted, fontSize: '1rem', marginBottom: '40px', maxWidth: '500px', margin: '0 auto 40px' }}>{s.subheadline as string}</p>}
+          {!!s.subheadline && <p style={{ color: theme.muted, fontSize: '1rem', marginBottom: '40px', maxWidth: '500px', margin: '0 auto 40px' }}>{s.subheadline as string}</p>}
           <form onSubmit={(e) => e.preventDefault()} style={{ display: 'flex', gap: '12px', maxWidth: '480px', margin: '0 auto' }}>
             <input
               type="email"
