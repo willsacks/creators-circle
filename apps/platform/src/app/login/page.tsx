@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
 
-export default function LoginPage() {
+function LoginContent() {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const searchParams = useSearchParams()
@@ -76,8 +76,7 @@ export default function LoginPage() {
       <div
         className="hidden lg:flex flex-1 bg-cc-dark items-center justify-center relative overflow-hidden"
         style={{
-          backgroundImage:
-            "url('https://picsum.photos/seed/login-bg/900/1200')",
+          backgroundImage: "url('https://picsum.photos/seed/login-bg/900/1200')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -91,5 +90,13 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginContent />
+    </Suspense>
   )
 }
