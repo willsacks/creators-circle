@@ -4,6 +4,7 @@ import { auth } from '@/lib/auth'
 import { prisma } from '@cc/db'
 import { redirect } from 'next/navigation'
 import { formatRelativeTime } from '@/lib/utils'
+import Link from 'next/link'
 import { CreateLanternButton } from './create-lantern-button'
 import { DeleteLanternButton } from './delete-lantern-button'
 import { EditLanternButton } from './edit-lantern-button'
@@ -73,6 +74,12 @@ export default async function LanternsPage() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
+                      <Link
+                        href={`/dashboard/lanterns/${lantern.id}`}
+                        className="text-xs text-muted-foreground hover:text-foreground px-2 py-1 rounded hover:bg-muted transition-colors"
+                      >
+                        View
+                      </Link>
                       <EditLanternButton lantern={lantern} />
                       <DeleteLanternButton lanternId={lantern.id} />
                     </div>

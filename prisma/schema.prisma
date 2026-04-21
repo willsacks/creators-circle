@@ -96,6 +96,7 @@ model Lantern {
   updatedAt  DateTime          @updatedAt
   comments   LanternComment[]
   reactions  LanternReaction[]
+  tracker    LanternTracker?
 }
 
 model LanternComment {
@@ -117,6 +118,29 @@ model LanternReaction {
   emoji     String  @default("🔥")
 
   @@unique([lanternId, userId])
+}
+
+model LanternTracker {
+  id          String               @id @default(cuid())
+  lanternId   String               @unique
+  lantern     Lantern              @relation(fields: [lanternId], references: [id], onDelete: Cascade)
+  trackerType String
+  config      String               @default("{}")
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  items       LanternTrackerItem[]
+}
+
+model LanternTrackerItem {
+  id        String         @id @default(cuid())
+  trackerId String
+  tracker   LanternTracker @relation(fields: [trackerId], references: [id], onDelete: Cascade)
+  title     String
+  position  Int
+  progress  Float          @default(0)
+  notes     String?
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
 }
 
 model ProgrammingEvent {
