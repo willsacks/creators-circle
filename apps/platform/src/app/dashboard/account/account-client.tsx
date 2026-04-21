@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { signOut } from 'next-auth/react'
+import { MediaUpload } from '@/components/ui/media-upload'
 
 interface AccountClientProps {
   user: {
@@ -17,6 +18,7 @@ interface AccountClientProps {
 
 export function AccountClient({ user }: AccountClientProps) {
   const [name, setName] = useState(user.name)
+  const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl ?? '')
   const [saving, setSaving] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState('')
@@ -28,7 +30,7 @@ export function AccountClient({ user }: AccountClientProps) {
       const res = await fetch('/api/profile/account', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name, avatarUrl }),
       })
       if (!res.ok) throw new Error()
       toast.success('Account updated!')
@@ -66,8 +68,11 @@ export function AccountClient({ user }: AccountClientProps) {
       <div className="bg-card border border-border rounded-2xl p-6 mb-6">
         <h2 className="font-serif text-xl font-bold mb-5">Profile</h2>
         <div className="flex items-center gap-5 mb-6">
-          <div className="w-16 h-16 rounded-full bg-cc-gold/20 flex items-center justify-center text-cc-gold text-xl font-bold">
-            {initials}
+          <div className="w-16 h-16 rounded-full overflow-hidden bg-cc-gold/20 flex items-center justify-center text-cc-gold text-xl font-bold shrink-0">
+            {avatarUrl
+              // eslint-disable-next-line @next/next/no-img-element
+              ? <img src={avatarUrl} alt={name} className="w-full h-full object-cover" />
+              : initials}
           </div>
           <div>
             <p className="font-medium">{user.name || 'No name set'}</p>
@@ -75,6 +80,12 @@ export function AccountClient({ user }: AccountClientProps) {
           </div>
         </div>
         <div className="space-y-4">
+          <MediaUpload
+            label="Profile Picture"
+            value={avatarUrl}
+            onChange={setAvatarUrl}
+            accept="image"
+          />
           <div>
             <label className="block text-sm font-medium mb-1.5">Display Name</label>
             <input
