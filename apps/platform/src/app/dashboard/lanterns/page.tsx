@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 import { formatRelativeTime } from '@/lib/utils'
 import { CreateLanternButton } from './create-lantern-button'
 import { DeleteLanternButton } from './delete-lantern-button'
-import { Edit2 } from 'lucide-react'
+import { EditLanternButton } from './edit-lantern-button'
 
 export default async function LanternsPage() {
   const session = await auth()
@@ -73,6 +73,7 @@ export default async function LanternsPage() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
+                      <EditLanternButton lantern={lantern} />
                       <DeleteLanternButton lanternId={lantern.id} />
                     </div>
                   </div>
