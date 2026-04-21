@@ -230,7 +230,7 @@ export function SiteSettingsClient({ profile }: { profile: Profile | null }) {
           <p className="text-sm text-muted-foreground mb-4">Connect your own domain to your artist site.</p>
           <input type="text" value={customDomain} onChange={(e) => setCustomDomain(e.target.value)} placeholder="www.yourname.com" className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-cc-gold" />
           <p className="text-xs text-muted-foreground mt-2">
-            After saving, point your domain's CNAME to <code className="bg-muted px-1 py-0.5 rounded">sites.creatorscircle.com</code> to complete setup.
+            After saving, point your domain's CNAME to <code className="bg-muted px-1 py-0.5 rounded">sites.creatorscircle.art</code> to complete setup.
           </p>
         </div>
       </div>
