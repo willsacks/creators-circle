@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { prisma } from '@cc/db'
 import Link from 'next/link'
 import { Users, Globe, Flame, Calendar, TrendingUp } from 'lucide-react'
