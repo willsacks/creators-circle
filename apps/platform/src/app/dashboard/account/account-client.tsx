@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { MediaUpload } from '@/components/ui/media-upload'
 
 interface AccountClientProps {
@@ -23,6 +23,7 @@ export function AccountClient({ user }: AccountClientProps) {
   const [deleting, setDeleting] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState('')
   const router = useRouter()
+  const { update } = useSession()
 
   async function handleSave() {
     setSaving(true)
@@ -33,6 +34,7 @@ export function AccountClient({ user }: AccountClientProps) {
         body: JSON.stringify({ name, avatarUrl }),
       })
       if (!res.ok) throw new Error()
+      await update()
       toast.success('Account updated!')
       router.refresh()
     } catch {

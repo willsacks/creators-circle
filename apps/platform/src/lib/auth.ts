@@ -44,16 +44,20 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     ...authConfig.callbacks,
-    jwt: async ({ token, user }) => {
-      if (user) {
-        const dbUser = await prisma.user.findUnique({
-          where: { id: user.id },
-          select: { role: true, plan: true, avatarUrl: true },
-        })
-        if (dbUser) {
-          token.role = dbUser.role
-          token.plan = dbUser.plan
-          token.avatarUrl = dbUser.avatarUrl ?? undefined
+    jwt: async ({ token, user, trigger }) => {
+      if (user || trigger === 'update') {
+        const userId = user?.id ?? token.sub
+        if (userId) {
+          const dbUser = await prisma.user.findUnique({
+            where: { id: userId },
+            select: { role: true, plan: true, avatarUrl: true, name: true },
+          })
+          if (dbUser) {
+            token.role = dbUser.role
+            token.plan = dbUser.plan
+            token.avatarUrl = dbUser.avatarUrl ?? undefined
+            if (dbUser.name) token.name = dbUser.name
+          }
         }
       }
       return token
