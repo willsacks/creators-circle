@@ -122,7 +122,7 @@ export function SiteSettingsClient({ profile }: { profile: Profile | null }) {
             <div>
               <label className="block text-sm font-medium mb-1.5">URL Slug</label>
               <div className="flex items-center gap-2">
-                <span className="text-muted-foreground text-sm">localhost:3001/</span>
+                <span className="text-muted-foreground text-sm">{(process.env.NEXT_PUBLIC_ARTIST_SITES_URL ?? 'http://localhost:3001').replace('https://', '').replace('http://', '')}/</span>
                 <input type="text" value={slug} onChange={(e) => setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''))} className="flex-1 px-4 py-2.5 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-cc-gold" />
               </div>
             </div>

@@ -58,7 +58,7 @@ export default async function AdminArtistsPage() {
                         {user.artistProfile.sitePublished ? 'Live' : 'Draft'}
                       </span>
                       <a
-                        href={`http://localhost:3001/${user.artistProfile.slug}`}
+                        href={`${process.env.NEXT_PUBLIC_ARTIST_SITES_URL ?? 'http://localhost:3001'}/${user.artistProfile.slug}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs text-cc-gold hover:underline"

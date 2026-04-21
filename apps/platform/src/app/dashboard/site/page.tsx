@@ -51,7 +51,7 @@ export default async function SiteDashboardPage() {
             <span className="text-sm text-muted-foreground">/{profile.slug}</span>
             {profile.sitePublished && (
               <a
-                href={`http://localhost:3001/${profile.slug}`}
+                href={`${process.env.NEXT_PUBLIC_ARTIST_SITES_URL ?? 'http://localhost:3001'}/${profile.slug}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-sm text-cc-gold hover:underline"

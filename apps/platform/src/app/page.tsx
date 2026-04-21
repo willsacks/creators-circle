@@ -106,7 +106,7 @@ export default function LandingPage() {
               Start Building →
             </Link>
             <Link
-              href="http://localhost:3001/will-sage"
+              href="${process.env.NEXT_PUBLIC_ARTIST_SITES_URL ?? 'http://localhost:3001'}/will-sage"
               className="border border-stone-300 text-stone-700 px-8 py-4 rounded-xl text-lg font-medium hover:bg-stone-100 transition-colors"
             >
               See an Example Site
