@@ -4,11 +4,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { createClient } from '@supabase/supabase-js'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
-
 const ALLOWED_TYPES = [
   'image/jpeg', 'image/png', 'image/webp', 'image/avif', 'image/gif',
   'video/mp4', 'video/webm', 'video/quicktime',
@@ -17,6 +12,11 @@ const ALLOWED_TYPES = [
 export async function POST(req: NextRequest) {
   const session = await auth()
   if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
 
   const formData = await req.formData()
   const file = formData.get('file') as File
