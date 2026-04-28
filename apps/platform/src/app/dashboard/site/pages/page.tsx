@@ -5,7 +5,7 @@ import { prisma } from '@cc/db'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 type PageType = 'HOME' | 'BIO' | 'MUSIC' | 'OFFERINGS' | 'CONTACT' | 'CUSTOM' | 'LANDING'
-import { Plus, Edit2, Trash2 } from 'lucide-react'
+import { Plus, Edit2, Trash2, ChevronLeft } from 'lucide-react'
 import { NewPageButton } from './new-page-button'
 import { DeletePageButton } from './delete-page-button'
 
@@ -33,9 +33,14 @@ export default async function PagesListPage() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="font-serif text-3xl font-bold">Pages</h1>
-          <p className="text-muted-foreground mt-1">Manage the pages on your artist site.</p>
+        <div className="flex items-center gap-3">
+          <Link href="/dashboard/site" className="text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted transition-colors">
+            <ChevronLeft size={20} />
+          </Link>
+          <div>
+            <h1 className="font-serif text-3xl font-bold">Pages</h1>
+            <p className="text-muted-foreground mt-1">Manage the pages on your artist site.</p>
+          </div>
         </div>
         <NewPageButton profileId={profile.id} />
       </div>
