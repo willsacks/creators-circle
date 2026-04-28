@@ -104,7 +104,7 @@ export function SectionSettingsPanel({ section, onChange }: SectionSettingsPanel
         <div>
           <Field label="Background Image">
             <MediaUpload value={(s.backgroundImage as string) ?? ''} onChange={(v) => set('backgroundImage', v)} accept="image" />
-            {s.backgroundImage && (
+            {!!(s.backgroundImage as string) && (
               <FocalPointPicker
                 imageUrl={s.backgroundImage as string}
                 focalX={(s.focalX as number) ?? 50}
@@ -139,7 +139,7 @@ export function SectionSettingsPanel({ section, onChange }: SectionSettingsPanel
         <div>
           <Field label="Image">
             <MediaUpload value={(s.image as string) ?? ''} onChange={(v) => set('image', v)} accept="image" />
-            {s.image && (
+            {!!(s.image as string) && (
               <FocalPointPicker
                 imageUrl={s.image as string}
                 focalX={(s.focalX as number) ?? 50}
@@ -197,7 +197,7 @@ export function SectionSettingsPanel({ section, onChange }: SectionSettingsPanel
         <div>
           <Field label="Background Image">
             <MediaUpload value={(s.backgroundImage as string) ?? ''} onChange={(v) => set('backgroundImage', v)} accept="image" />
-            {s.backgroundImage && (
+            {!!(s.backgroundImage as string) && (
               <FocalPointPicker
                 imageUrl={s.backgroundImage as string}
                 focalX={(s.focalX as number) ?? 50}
