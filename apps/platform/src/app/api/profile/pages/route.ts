@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@cc/db'
+import { buildSectionsForPageType } from '@/lib/page-templates'
 
 export async function POST(req: NextRequest) {
   const session = await auth()
@@ -18,13 +19,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
+  const resolvedType = pageType ?? 'CUSTOM'
+  const sections = buildSectionsForPageType(resolvedType, profile)
+
   const page = await prisma.sitePage.create({
     data: {
       profileId,
       title,
       slug,
-      pageType: pageType ?? 'CUSTOM',
-      sections: JSON.stringify([]),
+      pageType: resolvedType,
+      sections: JSON.stringify(sections),
       published: false,
     },
   })
