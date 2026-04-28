@@ -15,7 +15,8 @@ const ICONS: Record<string, React.ComponentType<{ size?: number; className?: str
 
 interface TrackerSetupProps {
   lanternId: string
-  onCreated: (tracker: unknown) => void
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onCreated: (tracker: any) => void
 }
 
 export function TrackerSetup({ lanternId, onCreated }: TrackerSetupProps) {
