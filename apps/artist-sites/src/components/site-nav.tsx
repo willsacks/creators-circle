@@ -28,6 +28,11 @@ interface SiteNavProps {
   socialLinks: Record<string, string>
 }
 
+function resolveNavUrl(url: string, artistSlug: string): string {
+  if (!url.startsWith('/') || url.startsWith(`/${artistSlug}`)) return url
+  return `/${artistSlug}${url}`
+}
+
 export function SiteNav({ artistName, artistSlug, navLinks, theme, socialLinks }: SiteNavProps) {
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -58,7 +63,7 @@ export function SiteNav({ artistName, artistSlug, navLinks, theme, socialLinks }
           {navLinks.map((link) => (
             <Link
               key={link.id}
-              href={link.url}
+              href={resolveNavUrl(link.url, artistSlug)}
               target={link.openInNew ? '_blank' : undefined}
               style={{ color: theme.muted, textDecoration: 'none', fontSize: '0.875rem', letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'color 0.2s' }}
               onMouseEnter={(e) => (e.currentTarget.style.color = theme.text)}
@@ -89,7 +94,7 @@ export function SiteNav({ artistName, artistSlug, navLinks, theme, socialLinks }
             {navLinks.map((link) => (
               <Link
                 key={link.id}
-                href={link.url}
+                href={resolveNavUrl(link.url, artistSlug)}
                 onClick={() => setMenuOpen(false)}
                 style={{ color: theme.text, textDecoration: 'none', fontSize: '1.125rem', fontFamily: theme.fontHeading }}
               >
