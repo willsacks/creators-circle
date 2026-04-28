@@ -34,6 +34,8 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
   switch (section.type) {
     case 'hero-fullwidth': {
       const paddingTop = s.height === 'medium' ? '200px' : '0'
+      const focalX = (s.focalX as number) ?? 50
+      const focalY = (s.focalY as number) ?? 50
       return (
         <section
           style={{
@@ -46,7 +48,7 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
             overflow: 'hidden',
             backgroundImage: s.backgroundImage ? `url(${s.backgroundImage as string})` : undefined,
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundPosition: `${focalX}% ${focalY}%`,
             backgroundColor: !s.backgroundImage ? '#1A1815' : undefined,
           }}
         >
@@ -108,11 +110,12 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
 
     case 'hero-split': {
       const imgLeft = s.imagePosition === 'left'
+      const focalX = (s.focalX as number) ?? 50
+      const focalY = (s.focalY as number) ?? 50
+      const imgStyle = { flex: 1, backgroundImage: s.image ? `url(${s.image as string})` : undefined, backgroundSize: 'cover', backgroundPosition: `${focalX}% ${focalY}%`, backgroundColor: theme.surface, minHeight: '400px' }
       return (
         <section style={{ display: 'flex', minHeight: '70vh', marginTop: '72px' }}>
-          {imgLeft && (
-            <div style={{ flex: 1, backgroundImage: s.image ? `url(${s.image as string})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: theme.surface, minHeight: '400px' }} />
-          )}
+          {imgLeft && <div style={imgStyle} />}
           <div style={{ flex: 1, display: 'flex', alignItems: 'center', padding: '80px 60px', backgroundColor: theme.surface }}>
             <div>
               <h1 style={{ fontFamily: theme.fontHeading, fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: theme.text, marginBottom: '24px', lineHeight: 1.1 }}>
@@ -126,9 +129,7 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
               )}
             </div>
           </div>
-          {!imgLeft && (
-            <div style={{ flex: 1, backgroundImage: s.image ? `url(${s.image as string})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: theme.surface, minHeight: '400px' }} />
-          )}
+          {!imgLeft && <div style={imgStyle} />}
         </section>
       )
     }
@@ -231,9 +232,11 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
       )
     }
 
-    case 'offering-hero':
+    case 'offering-hero': {
+      const focalX = (s.focalX as number) ?? 50
+      const focalY = (s.focalY as number) ?? 50
       return (
-        <section style={{ position: 'relative', padding: `${getPadding(s.paddingTop)} 0 ${getPadding(s.paddingBottom)}`, backgroundImage: s.backgroundImage ? `url(${s.backgroundImage as string})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: !s.backgroundImage ? theme.surface : undefined }}>
+        <section style={{ position: 'relative', padding: `${getPadding(s.paddingTop)} 0 ${getPadding(s.paddingBottom)}`, backgroundImage: s.backgroundImage ? `url(${s.backgroundImage as string})` : undefined, backgroundSize: 'cover', backgroundPosition: `${focalX}% ${focalY}%`, backgroundColor: !s.backgroundImage ? theme.surface : undefined }}>
           <div style={{ position: 'absolute', inset: 0, backgroundColor: '#000', opacity: (s.overlayOpacity as number) ?? 0.6 }} />
           <div style={{ position: 'relative', zIndex: 1, maxWidth: '800px', margin: '0 auto', padding: '0 24px', textAlign: 'center' }}>
             <h2 style={{ fontFamily: theme.fontHeading, fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', color: '#fff', marginBottom: '24px', lineHeight: 1.1 }}>
@@ -248,6 +251,7 @@ export function SectionRenderer({ section, theme }: { section: Section; theme: T
           </div>
         </section>
       )
+    }
 
     case 'music-embed':
       return (

@@ -2,6 +2,7 @@
 
 import { Section } from './page-editor'
 import { MediaUpload } from '@/components/ui/media-upload'
+import { FocalPointPicker } from '@/components/ui/focal-point-picker'
 
 interface SectionSettingsPanelProps {
   section: Section
@@ -103,6 +104,14 @@ export function SectionSettingsPanel({ section, onChange }: SectionSettingsPanel
         <div>
           <Field label="Background Image">
             <MediaUpload value={(s.backgroundImage as string) ?? ''} onChange={(v) => set('backgroundImage', v)} accept="image" />
+            {s.backgroundImage && (
+              <FocalPointPicker
+                imageUrl={s.backgroundImage as string}
+                focalX={(s.focalX as number) ?? 50}
+                focalY={(s.focalY as number) ?? 50}
+                onChange={(x, y) => onChange({ focalX: x, focalY: y })}
+              />
+            )}
           </Field>
           <Field label="Headline">
             <TextInput value={(s.headline as string) ?? ''} onChange={(v) => set('headline', v)} placeholder="Your headline" />
@@ -130,6 +139,14 @@ export function SectionSettingsPanel({ section, onChange }: SectionSettingsPanel
         <div>
           <Field label="Image">
             <MediaUpload value={(s.image as string) ?? ''} onChange={(v) => set('image', v)} accept="image" />
+            {s.image && (
+              <FocalPointPicker
+                imageUrl={s.image as string}
+                focalX={(s.focalX as number) ?? 50}
+                focalY={(s.focalY as number) ?? 50}
+                onChange={(x, y) => onChange({ focalX: x, focalY: y })}
+              />
+            )}
           </Field>
           <Field label="Headline">
             <TextInput value={(s.headline as string) ?? ''} onChange={(v) => set('headline', v)} />
@@ -180,6 +197,14 @@ export function SectionSettingsPanel({ section, onChange }: SectionSettingsPanel
         <div>
           <Field label="Background Image">
             <MediaUpload value={(s.backgroundImage as string) ?? ''} onChange={(v) => set('backgroundImage', v)} accept="image" />
+            {s.backgroundImage && (
+              <FocalPointPicker
+                imageUrl={s.backgroundImage as string}
+                focalX={(s.focalX as number) ?? 50}
+                focalY={(s.focalY as number) ?? 50}
+                onChange={(x, y) => onChange({ focalX: x, focalY: y })}
+              />
+            )}
           </Field>
           <Field label="Title">
             <TextInput value={(s.title as string) ?? ''} onChange={(v) => set('title', v)} />
