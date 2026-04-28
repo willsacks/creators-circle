@@ -5,7 +5,8 @@ import { toast } from 'sonner'
 import { Music, Ticket, BookOpen, Palette, Sliders, Plus, Minus, X } from 'lucide-react'
 import { TRACKER_TYPES, TrackerType } from '@/lib/tracker-types'
 
-const ICONS: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ICONS: Record<string, React.ComponentType<any>> = {
   Music,
   Ticket,
   BookOpen,
