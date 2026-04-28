@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { Plus, Trash2, GripVertical } from 'lucide-react'
+import { Plus, Trash2, GripVertical, ChevronLeft } from 'lucide-react'
+import Link from 'next/link'
 
 const THEMES = [
   { id: 'sage-dark', name: 'Sage Dark', bg: '#0E0D0C', accent: '#C4892A' },
@@ -97,9 +98,14 @@ export function SiteSettingsClient({ profile }: { profile: Profile | null }) {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="font-serif text-3xl font-bold mb-1">Site Settings</h1>
-          <p className="text-muted-foreground">Configure your artist site.</p>
+        <div className="flex items-center gap-3">
+          <Link href="/dashboard/site" className="text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted transition-colors">
+            <ChevronLeft size={20} />
+          </Link>
+          <div>
+            <h1 className="font-serif text-3xl font-bold mb-1">Site Settings</h1>
+            <p className="text-muted-foreground">Configure your artist site.</p>
+          </div>
         </div>
         <button
           onClick={handleSave}
