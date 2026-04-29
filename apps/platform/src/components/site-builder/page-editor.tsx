@@ -240,7 +240,7 @@ export function PageEditor({ page, profileSlug }: PageEditorProps) {
         </div>
         <div className="flex items-center gap-2">
           <a
-            href={`${process.env.NEXT_PUBLIC_ARTIST_SITES_URL ?? 'http://localhost:3001'}/${profileSlug}/${page.slug}`}
+            href={`${process.env.NEXT_PUBLIC_ARTIST_SITES_URL ?? 'http://localhost:3001'}/preview/${profileSlug}/${page.slug}?token=${process.env.NEXT_PUBLIC_PREVIEW_SECRET}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground px-3 py-1.5 rounded-lg hover:bg-muted transition-colors"
