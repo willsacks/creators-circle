@@ -252,7 +252,7 @@ export function PageEditor({ page, profileSlug }: PageEditorProps) {
             disabled={saving}
             className="flex items-center gap-1.5 border border-border px-3 py-1.5 rounded-lg text-sm hover:bg-muted transition-colors disabled:opacity-60"
           >
-            <Save size={15} /> {saving ? 'Saving...' : 'Save Draft'}
+            <Save size={15} /> {saving ? 'Saving...' : 'Save'}
           </button>
           <button
             onClick={() => handleSave(!published)}
